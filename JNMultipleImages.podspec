@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = 'This is a description for this library'
 
-  s.homepage     = "http://EXAMPLEs/JNMultipleImages"
+  s.homepage     = "https://github.com/JNDisrupter"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -50,9 +50,8 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "JNDisrupter"}
+  s.authors            = { 'JN Disrupter' => 'eng.jayel.z@gmail.com' }
   # Or just: s.author    = "mohammadnabulsi"
-  # s.authors            = { "mohammadnabulsi" => "mohammad.s.nabulsi@gmail.com" }
   # s.social_media_url   = "http://twitter.com/mohammadnabulsi"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -61,11 +60,10 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  # s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  # s.platform     = {ios, “9.0”}
 
   #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
+   s.ios.deployment_target = "5.0"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"

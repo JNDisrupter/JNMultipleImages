@@ -2,8 +2,8 @@
 //  JNMultipleImages.h
 //  JNMultipleImages
 //
-//  Created by Mohammad Nabulsi on 9/13/17.
-//  Copyright © 2017 Mohammad Nabulsi. All rights reserved.
+//  Created by JN Disrupter on 9/13/17.
+//  Copyright © 2017 JN Disrupter. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

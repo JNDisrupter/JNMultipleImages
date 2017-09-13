@@ -7,28 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		845C00DD1F6951D800B2458D /* JNMultipleImages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845C00D31F6951D800B2458D /* JNMultipleImages.framework */; };
-		845C00E21F6951D800B2458D /* JNMultipleImagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C00E11F6951D800B2458D /* JNMultipleImagesTests.swift */; };
+		4336ECD15C774B7CD653FDFC /* Pods_JNMultipleImages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3FBCD3213C9E2AA9789B142 /* Pods_JNMultipleImages.framework */; };
 		845C00E41F6951D800B2458D /* JNMultipleImages.h in Headers */ = {isa = PBXBuildFile; fileRef = 845C00D61F6951D800B2458D /* JNMultipleImages.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		845C00EE1F69526B00B2458D /* Assests.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845C00ED1F69526B00B2458D /* Assests.xcassets */; };
+		845C00F11F69529D00B2458D /* JNImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C00EF1F69529D00B2458D /* JNImage.swift */; };
+		845C00F21F69529D00B2458D /* JNMultipleImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C00F01F69529D00B2458D /* JNMultipleImagesView.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		845C00DE1F6951D800B2458D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 845C00CA1F6951D800B2458D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 845C00D21F6951D800B2458D;
-			remoteInfo = JNMultipleImages;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		0F1AA5B666EB5E78F7EBEBF2 /* Pods-JNMultipleImages.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JNMultipleImages.release.xcconfig"; path = "Pods/Target Support Files/Pods-JNMultipleImages/Pods-JNMultipleImages.release.xcconfig"; sourceTree = "<group>"; };
+		3BFD5AD05B98FA0EC77A2BD9 /* Pods-JNMultipleImagesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JNMultipleImagesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JNMultipleImagesTests/Pods-JNMultipleImagesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		60F746FA72BFD5B58BC3394A /* Pods_JNMultipleImagesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JNMultipleImagesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		845C00D31F6951D800B2458D /* JNMultipleImages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JNMultipleImages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		845C00D61F6951D800B2458D /* JNMultipleImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JNMultipleImages.h; sourceTree = "<group>"; };
 		845C00D71F6951D800B2458D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		845C00DC1F6951D800B2458D /* JNMultipleImagesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JNMultipleImagesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		845C00E11F6951D800B2458D /* JNMultipleImagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JNMultipleImagesTests.swift; sourceTree = "<group>"; };
-		845C00E31F6951D800B2458D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		845C00ED1F69526B00B2458D /* Assests.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assests.xcassets; sourceTree = "<group>"; };
+		845C00EF1F69529D00B2458D /* JNImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNImage.swift; sourceTree = "<group>"; };
+		845C00F01F69529D00B2458D /* JNMultipleImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNMultipleImagesView.swift; sourceTree = "<group>"; };
+		D3FBCD3213C9E2AA9789B142 /* Pods_JNMultipleImages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JNMultipleImages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D460E98232BDDC5B93F003A9 /* Pods-JNMultipleImagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JNMultipleImagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JNMultipleImagesTests/Pods-JNMultipleImagesTests.release.xcconfig"; sourceTree = "<group>"; };
+		DB6D0015DDC91EF8CB50BA45 /* Pods-JNMultipleImages.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JNMultipleImages.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JNMultipleImages/Pods-JNMultipleImages.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,26 +34,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		845C00D91F6951D800B2458D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				845C00DD1F6951D800B2458D /* JNMultipleImages.framework in Frameworks */,
+				4336ECD15C774B7CD653FDFC /* Pods_JNMultipleImages.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0553680618A162A7600DE433 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3FBCD3213C9E2AA9789B142 /* Pods_JNMultipleImages.framework */,
+				60F746FA72BFD5B58BC3394A /* Pods_JNMultipleImagesTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		071F49090877D8A44AAB663D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB6D0015DDC91EF8CB50BA45 /* Pods-JNMultipleImages.debug.xcconfig */,
+				0F1AA5B666EB5E78F7EBEBF2 /* Pods-JNMultipleImages.release.xcconfig */,
+				3BFD5AD05B98FA0EC77A2BD9 /* Pods-JNMultipleImagesTests.debug.xcconfig */,
+				D460E98232BDDC5B93F003A9 /* Pods-JNMultipleImagesTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		845C00C91F6951D800B2458D = {
 			isa = PBXGroup;
 			children = (
 				845C00D51F6951D800B2458D /* JNMultipleImages */,
-				845C00E01F6951D800B2458D /* JNMultipleImagesTests */,
 				845C00D41F6951D800B2458D /* Products */,
+				071F49090877D8A44AAB663D /* Pods */,
+				0553680618A162A7600DE433 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				845C00D31F6951D800B2458D /* JNMultipleImages.framework */,
-				845C00DC1F6951D800B2458D /* JNMultipleImagesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,19 +82,13 @@
 		845C00D51F6951D800B2458D /* JNMultipleImages */ = {
 			isa = PBXGroup;
 			children = (
+				845C00EF1F69529D00B2458D /* JNImage.swift */,
+				845C00F01F69529D00B2458D /* JNMultipleImagesView.swift */,
 				845C00D61F6951D800B2458D /* JNMultipleImages.h */,
 				845C00D71F6951D800B2458D /* Info.plist */,
+				845C00ED1F69526B00B2458D /* Assests.xcassets */,
 			);
 			path = JNMultipleImages;
-			sourceTree = "<group>";
-		};
-		845C00E01F6951D800B2458D /* JNMultipleImagesTests */ = {
-			isa = PBXGroup;
-			children = (
-				845C00E11F6951D800B2458D /* JNMultipleImagesTests.swift */,
-				845C00E31F6951D800B2458D /* Info.plist */,
-			);
-			path = JNMultipleImagesTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,10 +109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 845C00E71F6951D800B2458D /* Build configuration list for PBXNativeTarget "JNMultipleImages" */;
 			buildPhases = (
+				839F16D5CECB848A8DB3BB86 /* [CP] Check Pods Manifest.lock */,
 				845C00CE1F6951D800B2458D /* Sources */,
 				845C00CF1F6951D800B2458D /* Frameworks */,
 				845C00D01F6951D800B2458D /* Headers */,
 				845C00D11F6951D800B2458D /* Resources */,
+				FC3787605A521A1FE0B819BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -117,24 +124,6 @@
 			productName = JNMultipleImages;
 			productReference = 845C00D31F6951D800B2458D /* JNMultipleImages.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		845C00DB1F6951D800B2458D /* JNMultipleImagesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 845C00EA1F6951D800B2458D /* Build configuration list for PBXNativeTarget "JNMultipleImagesTests" */;
-			buildPhases = (
-				845C00D81F6951D800B2458D /* Sources */,
-				845C00D91F6951D800B2458D /* Frameworks */,
-				845C00DA1F6951D800B2458D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				845C00DF1F6951D800B2458D /* PBXTargetDependency */,
-			);
-			name = JNMultipleImagesTests;
-			productName = JNMultipleImagesTests;
-			productReference = 845C00DC1F6951D800B2458D /* JNMultipleImagesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -148,10 +137,7 @@
 				TargetAttributes = {
 					845C00D21F6951D800B2458D = {
 						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
-					};
-					845C00DB1F6951D800B2458D = {
-						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -169,7 +155,6 @@
 			projectRoot = "";
 			targets = (
 				845C00D21F6951D800B2458D /* JNMultipleImages */,
-				845C00DB1F6951D800B2458D /* JNMultipleImagesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -179,43 +164,59 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		845C00DA1F6951D800B2458D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				845C00EE1F69526B00B2458D /* Assests.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		839F16D5CECB848A8DB3BB86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JNMultipleImages-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC3787605A521A1FE0B819BB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JNMultipleImages/Pods-JNMultipleImages-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		845C00CE1F6951D800B2458D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		845C00D81F6951D800B2458D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				845C00E21F6951D800B2458D /* JNMultipleImagesTests.swift in Sources */,
+				845C00F21F69529D00B2458D /* JNMultipleImagesView.swift in Sources */,
+				845C00F11F69529D00B2458D /* JNImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		845C00DF1F6951D800B2458D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 845C00D21F6951D800B2458D /* JNMultipleImages */;
-			targetProxy = 845C00DE1F6951D800B2458D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		845C00E51F6951D800B2458D /* Debug */ = {
@@ -321,7 +322,9 @@
 		};
 		845C00E81F6951D800B2458D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB6D0015DDC91EF8CB50BA45 /* Pods-JNMultipleImages.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -333,13 +336,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = test.JNMultipleImages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		845C00E91F6951D800B2458D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F1AA5B666EB5E78F7EBEBF2 /* Pods-JNMultipleImages.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -351,28 +357,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = test.JNMultipleImages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		845C00EB1F6951D800B2458D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = JNMultipleImagesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = test.JNMultipleImagesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		845C00EC1F6951D800B2458D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = JNMultipleImagesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = test.JNMultipleImagesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -396,14 +380,7 @@
 				845C00E91F6951D800B2458D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		845C00EA1F6951D800B2458D /* Build configuration list for PBXNativeTarget "JNMultipleImagesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				845C00EB1F6951D800B2458D /* Debug */,
-				845C00EC1F6951D800B2458D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -15,4 +15,4 @@ Jayel Zaghmoutt & Mohammad Nabulsi
 
 ## License
 
-JNMultipleImages is available under the MIT license. See the LICENSE file for more info.
+JNMultipleImages is available under the MIT license. See the [LICENSE](https://github.com/JNDisrupter/JNMultipleImages/blob/master/LICENSE) file for more info.

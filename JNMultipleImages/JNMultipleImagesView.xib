@@ -22,22 +22,22 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYz-LJ-1Pp">
                     <rect key="frame" x="0.0" y="0.0" width="374" height="338"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42j-0B-4TS">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42j-0B-4TS">
                     <rect key="frame" x="332" y="317.5" width="42" height="20.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="CYz-LJ-1Pp" secondAttribute="trailing" id="KsA-eY-1x7"/>
                 <constraint firstItem="CYz-LJ-1Pp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Nu7-uu-uMn"/>
-                <constraint firstAttribute="bottom" secondItem="42j-0B-4TS" secondAttribute="bottom" id="OId-Ve-WYz"/>
                 <constraint firstAttribute="bottom" secondItem="CYz-LJ-1Pp" secondAttribute="bottom" id="YLA-gP-Wxe"/>
-                <constraint firstAttribute="trailing" secondItem="42j-0B-4TS" secondAttribute="trailing" id="YuA-4Z-OCp"/>
                 <constraint firstItem="CYz-LJ-1Pp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rFd-Pw-Bwc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

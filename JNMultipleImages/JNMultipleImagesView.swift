@@ -163,6 +163,9 @@ open class JNMultipleImagesView: UIView {
             
             let mediaView = UIImageView(image: imagesPlaceHolder)
             
+            // Set background color
+            mediaView.backgroundColor = UIColor.clear
+            
             // Get media item
             let mediaItem = images[i]
             
@@ -174,11 +177,11 @@ open class JNMultipleImagesView: UIView {
             } else if let url = URL(string: mediaItem.url) , !mediaItem.url.isEmpty {
                 
                 // Load image
-                mediaView.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.white)
+                mediaView.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.gray)
                 mediaView.sd_setShowActivityIndicatorView(true)
                 
                 // Set image
-                mediaView.sd_setImage(with: url, placeholderImage: placeHolderImage, options: [SDWebImageOptions.retryFailed], completed: { (image, error, cashe, url) in
+                mediaView.sd_setImage(with: url, placeholderImage: placeHolderImage, options: [], completed: { (image, error, cashe, url) in
                     
                     if let error = error , let imageUrl = url {
                         

@@ -5,6 +5,12 @@
 [![License](https://img.shields.io/cocoapods/l/JNMultipleImages.svg?style=flat)](http://cocoapods.org/pods/JNMultipleImages)
 [![Platform](https://img.shields.io/cocoapods/p/JNMultipleImages.svg?style=flat)](http://cocoapods.org/pods/JNMultipleImages)
 
+## Preview
+<img src="https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages1.gif" width="280"/>  <img src="https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages2.gif" width="280"/>
+<img src="https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages3.gif" width="280"/>
+<img src="https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages4.gif" width="280"/>
+<img src="https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages5.gif" width="280"/>
+
 ## Installation
 
 JNMultipleImages is available through [CocoaPods](http://cocoapods.org). To install

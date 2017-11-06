@@ -9,30 +9,19 @@
 import Foundation
 import UIKit
 
+/// JNImage
 open class JNImage {
     
-    // Image
+    /// Image
     open var image: UIImage?
     
-    // Height
-    open var height: Int
-    
-    // Width
-    open var width: Int
-    
-    // Url
+    /// Url
     open var url : String
     
     /**
-     * Init
-     **/
-    public init(){
-        
-        // Set Width
-        self.width = 0
-        
-        // Set Height
-        self.height = 0
+     Initializer
+     */
+    public init() {
         
         // Init Image
         self.image = nil

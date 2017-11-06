@@ -12,6 +12,7 @@
 		845C00EE1F69526B00B2458D /* Assests.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845C00ED1F69526B00B2458D /* Assests.xcassets */; };
 		845C00F11F69529D00B2458D /* JNImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C00EF1F69529D00B2458D /* JNImage.swift */; };
 		845C00F21F69529D00B2458D /* JNMultipleImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C00F01F69529D00B2458D /* JNMultipleImagesView.swift */; };
+		848E29F21F6AE8D100996FC2 /* JNMultipleImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848E29F11F6AE8D100996FC2 /* JNMultipleImagesView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		845C00ED1F69526B00B2458D /* Assests.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assests.xcassets; sourceTree = "<group>"; };
 		845C00EF1F69529D00B2458D /* JNImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNImage.swift; sourceTree = "<group>"; };
 		845C00F01F69529D00B2458D /* JNMultipleImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNMultipleImagesView.swift; sourceTree = "<group>"; };
+		848E29F11F6AE8D100996FC2 /* JNMultipleImagesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JNMultipleImagesView.xib; sourceTree = "<group>"; };
 		D3FBCD3213C9E2AA9789B142 /* Pods_JNMultipleImages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JNMultipleImages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D460E98232BDDC5B93F003A9 /* Pods-JNMultipleImagesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JNMultipleImagesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JNMultipleImagesTests/Pods-JNMultipleImagesTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB6D0015DDC91EF8CB50BA45 /* Pods-JNMultipleImages.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JNMultipleImages.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JNMultipleImages/Pods-JNMultipleImages.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				845C00EF1F69529D00B2458D /* JNImage.swift */,
 				845C00F01F69529D00B2458D /* JNMultipleImagesView.swift */,
+				848E29F11F6AE8D100996FC2 /* JNMultipleImagesView.xib */,
 				845C00D61F6951D800B2458D /* JNMultipleImages.h */,
 				845C00D71F6951D800B2458D /* Info.plist */,
 				845C00ED1F69526B00B2458D /* Assests.xcassets */,
@@ -132,7 +135,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Mohammad Nabulsi";
 				TargetAttributes = {
 					845C00D21F6951D800B2458D = {
@@ -164,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848E29F21F6AE8D100996FC2 /* JNMultipleImagesView.xib in Resources */,
 				845C00EE1F69526B00B2458D /* Assests.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,7 +233,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -237,7 +243,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -267,6 +277,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -283,7 +294,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -291,7 +304,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -313,6 +330,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -337,7 +355,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -357,7 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = test.JNMultipleImages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

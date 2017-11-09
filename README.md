@@ -70,10 +70,10 @@ func setup(images : [JNImage] , countLabelPosition : JNMultipleImagesCountLabelP
  * itemsMargin : The margin between items.
  
 > The library will adjust the UIImageViews content mode automatically like the follows :
- * If the image dimensions is smaller than the image view dimensions then the content mode is aspectFill
- * If image width and height ratio less than the image view width and height ration then the content mode is aspectFill
- * If the image is landscape and the image height is less than the image view height then the content mode is topRight
- * Other than this it is aspectFit.
+> * If the image dimensions is smaller than the image view dimensions then the content mode is aspectFill
+> * If image width and height ratio less than the image view width and height ration then the content mode is aspectFill
+> * If the image is landscape and the image height is less than the image view height then the content mode is topRight
+> * Other than this it is aspectFit.
 
 ## Authors
 

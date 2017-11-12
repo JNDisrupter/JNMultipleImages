@@ -36,7 +36,7 @@ To integrate JNMultipleImages into your Xcode project using CocoaPods, specify i
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'JNMultipleImages', '~> 4.5'
+    pod 'JNMultipleImages'
 end
 ```
 

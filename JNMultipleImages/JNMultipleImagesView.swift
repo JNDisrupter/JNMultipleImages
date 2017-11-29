@@ -36,7 +36,7 @@ open class JNMultipleImagesView: UIView {
     @IBOutlet public weak var countLabel: UILabel!
     
     /// Delegate
-    public weak var delegate : JNMultipleImagesViewDelegate!
+    public weak var delegate : JNMultipleImagesViewDelegate?
     
     /**
      Loads a view instance from the xib file
@@ -82,7 +82,7 @@ open class JNMultipleImagesView: UIView {
         for view in views {
             
             // Get view as image view and get image
-            if let view = view as? UIImageView , let image = view.image{
+            if let view = view as? UIImageView , let image = view.image {
                 
                 // Adjust image view content mode according to size
                 self.adjustImageViewContentModeAccordingToImage(image: image, mediaView: view)
@@ -94,7 +94,7 @@ open class JNMultipleImagesView: UIView {
      Sets up the view by loading it from the xib file and setting its frame
      */
     private func setupView() {
-        let view = loadViewFromXibFile()
+        let view = self.loadViewFromXibFile()
         view.frame = bounds
         self.addSubview(view)
         
@@ -107,6 +107,10 @@ open class JNMultipleImagesView: UIView {
         
         // Setup view
         self.clipsToBounds = true
+        
+        // Enable user interactions
+        self.isUserInteractionEnabled = true
+        self.imagesContainerView.isUserInteractionEnabled = true
         
         // Reset view
         self.resetView()
@@ -140,16 +144,139 @@ open class JNMultipleImagesView: UIView {
     }
     
     /**
+     Did click media view
+     */
+    @objc private func didClickMediaView(gestureRecognizer : UIGestureRecognizer) {
+        
+        // Get superclass as image view
+        if let mediaView = gestureRecognizer.view as? UIImageView {
+            
+            // Call delegate
+            delegate?.jsMultipleImagesView?(didClickItem: mediaView.tag)
+        }
+    }
+    
+    /**
+     Setup multiple images view
+     - parameter images: The images array to load which might be string or UIImage
+     - parameter countLabelPosition: count label position
+     - parameter placeHolderImage: place holder image to use when failed to load image
+     - parameter itemsMargin: The margin between images
+     */
+    public func setup(images : [Any] , countLabelPosition : JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.bottomRight , placeHolderImage : UIImage? = nil , itemsMargin : CGFloat = 2.0) {
+        
+        // Reset view
+        self.resetView()
+        
+        var count = 0
+        
+        for mediaItem in images {
+            
+            // Create JNImage instance
+            if mediaItem is UIImage || mediaItem is String {
+             
+                let jnImage = JNImage()
+                
+                if let mediaItem = mediaItem as? UIImage {
+                    jnImage.image = mediaItem
+                } else if let mediaItem = mediaItem as? String {
+                    jnImage.url = mediaItem
+                }
+                
+                // Create media view
+                let mediaView = self.createMediaView(mediaItem: jnImage,placeHolderImage: placeHolderImage)
+                
+                // Set media view tag
+                mediaView.tag = count
+                
+                // Add media view
+                self.imagesContainerView.addSubview(mediaView)
+                
+                // Increment count
+                count += 1
+            }
+            
+            // Check if 4 items created break loop
+            if self.imagesContainerView.subviews.count == 4 {
+                break
+            }
+        }
+        
+        // Setup count label
+        self.setupCountLabel(totalMediaItemsCount: images.count,countLabelPosition: countLabelPosition)
+        
+        // Add constraints
+        self.addConstraints(itemsMargin: itemsMargin)
+    }
+    
+    /**
      Setup multiple images view
      - parameter images: The NJImage array to load
      - parameter countLabelPosition: count label position
      - parameter placeHolderImage: place holder image to use when failed to load image
      - parameter itemsMargin: The margin between images
      */
-    public func setup(images : [JNImage] , countLabelPosition : JNMultipleImagesCountLabelPosition = .bottomRight , placeHolderImage : UIImage? = nil , itemsMargin : CGFloat = 2.0) {
+    public func setup(images : [JNImage] , countLabelPosition : JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.bottomRight , placeHolderImage : UIImage? = nil , itemsMargin : CGFloat = 2.0) {
         
         // Reset view
         self.resetView()
+        
+        var count = 0
+        
+        for mediaItem in images {
+            
+            // Create media view
+            let mediaView = self.createMediaView(mediaItem: mediaItem,placeHolderImage: placeHolderImage)
+            
+            // Set media view tag
+            mediaView.tag = count
+            
+            // Add media view
+            self.imagesContainerView.addSubview(mediaView)
+            
+            // Increment count
+            count += 1
+            
+            // Check if 4 items created break loop
+            if self.imagesContainerView.subviews.count == 4 {
+                break
+            }
+        }
+        
+        // Setup count label
+        self.setupCountLabel(totalMediaItemsCount: images.count,countLabelPosition: countLabelPosition)
+        
+        // Add constraints
+        self.addConstraints(itemsMargin: itemsMargin)
+    }
+    
+    /**
+     Setup count label
+     - parameter totalMediaItemsCount: The total count of the media array
+     - parameter countLabelPosition: count label position
+     */
+    private func setupCountLabel(totalMediaItemsCount:Int,countLabelPosition : JNMultipleImagesCountLabelPosition) {
+        
+        // Add count label if number of item more than the limit
+        if totalMediaItemsCount > 4 {
+            
+            // Setup count label
+            let numberOfExtraMedia = totalMediaItemsCount - 4
+            self.countLabel.text = "+" + numberOfExtraMedia.description
+            self.countLabel.isHidden = false
+            
+            // Add count label constraint
+            self.addCountLabelConstraint(countLabelPosition: countLabelPosition)
+        }
+    }
+    
+    /**
+     Create media view
+     - parameter mediaItem: The JNImage to apply to the UIImageView
+     - parameter placeHolderImage: place holder image to use when failed to load image
+     - returns : UIImageView instance
+     */
+    private func createMediaView(mediaItem : JNImage , placeHolderImage : UIImage?) -> UIImageView {
         
         var imagesPlaceHolder = placeHolderImage
         
@@ -159,76 +286,68 @@ open class JNMultipleImagesView: UIView {
             imagesPlaceHolder = UIImage(named: "BrokenImageDefaultPlaceholder", in: bundle, compatibleWith: nil)
         }
         
-        for i in 0..<min(4,images.count) {
+        let mediaView = UIImageView(image: imagesPlaceHolder)
+        
+        // Enable user interactions
+        mediaView.isUserInteractionEnabled = true
+        
+        // Add tap gesture to the media view
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didClickMediaView(gestureRecognizer:)))
+        mediaView.addGestureRecognizer(tapGesture)
+        
+        // Set background color
+        mediaView.backgroundColor = UIColor.clear
+        
+        // Get image
+        if let image = mediaItem.image {
             
-            let mediaView = UIImageView(image: imagesPlaceHolder)
+            // Set image
+            mediaView.image = image
+        } else if !mediaItem.url.isEmpty , let url = URL(string: mediaItem.url) {
             
-            // Set background color
-            mediaView.backgroundColor = UIColor.clear
+            // Load image
+            mediaView.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.gray)
+            mediaView.sd_setShowActivityIndicatorView(true)
             
-            // Get media item
-            let mediaItem = images[i]
-            
-            // Get image
-            if let image = mediaItem.image {
+            // Set image
+            mediaView.sd_setImage(with: url, placeholderImage: imagesPlaceHolder, options: [], completed: { (image, error, cashe, url) in
                 
-                // Set image
-                mediaView.image = image
-            } else if let url = URL(string: mediaItem.url) , !mediaItem.url.isEmpty {
-                
-                // Load image
-                mediaView.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.gray)
-                mediaView.sd_setShowActivityIndicatorView(true)
-                
-                // Set image
-                mediaView.sd_setImage(with: url, placeholderImage: placeHolderImage, options: [], completed: { (image, error, cashe, url) in
+                if let error = error , let imageUrl = url {
                     
-                    if let error = error , let imageUrl = url {
-                        
-                        // Set place holder image
-                        mediaView.image = imagesPlaceHolder
-                        
-                        // Call delegate
-                        if self.delegate != nil && self.delegate.responds(to: #selector(JNMultipleImagesViewDelegate.jsMultipleImagesView(failedToLoadImage:error:))) {
-                            self.delegate.jsMultipleImagesView!(failedToLoadImage: imageUrl.absoluteString, error: error)
-                        }
-                    } else if let image = image , let imageUrl = url {
-                        
-                        // Set image
-                        mediaView.image = image
-                        
-                        // Call delegate
-                        if self.delegate != nil && self.delegate.responds(to: #selector(JNMultipleImagesViewDelegate.jsMultipleImagesView(didLoadImage:image:))) {
-                            self.delegate.jsMultipleImagesView!(didLoadImage: imageUrl.absoluteString, image: image)
-                        }
+                    // Set place holder image
+                    mediaView.image = imagesPlaceHolder
+                    
+                    // Call delegate
+                    if self.delegate != nil {
+                        self.delegate?.jsMultipleImagesView?(failedToLoadImage: imageUrl.absoluteString, error: error)
                     }
+                } else if let image = image , let imageUrl = url {
                     
-                    // Adjust media view content mode
-                    self.adjustImageViewContentModeAccordingToImage(image: mediaView.image!, mediaView: mediaView)
-                })
-            }
-            
-            // Clip to bounds
-            mediaView.clipsToBounds = true
-            
-            // Add media view
-            self.imagesContainerView.addSubview(mediaView)
+                    // Set image
+                    mediaView.image = image
+                    
+                    // Call delegate
+                    if self.delegate != nil {
+                        self.delegate?.jsMultipleImagesView?(didLoadImage: imageUrl.absoluteString, image: image)
+                    }
+                }
+                
+                // Adjust media view content mode
+                self.adjustImageViewContentModeAccordingToImage(image: mediaView.image!, mediaView: mediaView)
+            })
         }
         
-        // Add count label if number of item more than the limit
-        if images.count > 4 {
+        // Get image
+        if let image = mediaView.image {
             
-            // Setup count label
-            let numberOfExtraMedia = images.count - 4
-            self.countLabel.text = "+" + numberOfExtraMedia.description
-            self.countLabel.isHidden = false
-            
-            // Add count label constraint
-            self.addCountLabelConstraint(countLabelPosition: countLabelPosition)
+            // Adjust media view content mode
+            self.adjustImageViewContentModeAccordingToImage(image: image, mediaView: mediaView)
         }
         
-        // Add constraints
-        self.addConstraints(itemsMargin: itemsMargin)
+        // Clip to bounds
+        mediaView.clipsToBounds = true
+        
+        return mediaView
     }
     
     /**
@@ -244,9 +363,9 @@ open class JNMultipleImagesView: UIView {
         let widthInPoints = image.size.width
         let widthInPixels = widthInPoints * image.scale
         
-        let firstCondition = widthInPixels < mediaView.frame.size.width && heightInPixels < mediaView.frame.size.height
-        let secondCondtion = (heightInPixels / widthInPixels) < mediaView.frame.size.height / mediaView.frame.size.width
-        let thirdCondition = CGFloat(widthInPoints / heightInPixels) < mediaView.frame.size.width / mediaView.frame.size.height
+        let firstCondition = (widthInPixels < mediaView.frame.size.width) && (heightInPixels < mediaView.frame.size.height)
+        let secondCondtion = (heightInPixels / widthInPixels) < (mediaView.frame.size.height / mediaView.frame.size.width)
+        let thirdCondition = CGFloat(widthInPoints / heightInPixels) < (mediaView.frame.size.width / mediaView.frame.size.height)
         
         // Set image content mode according image width and height
         if firstCondition || secondCondtion || thirdCondition {
@@ -439,4 +558,10 @@ open class JNMultipleImagesView: UIView {
      - parameter error: The error
      */
     @objc optional func jsMultipleImagesView(failedToLoadImage imageUrl : String , error : Error)
+    
+    /**
+     Did click item at index
+     - parameter atIndex: The clicked item index
+     */
+    @objc optional func jsMultipleImagesView(didClickItem atIndex : Int)
 }

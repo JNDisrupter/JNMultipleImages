@@ -36,7 +36,7 @@ To integrate JNMultipleImages into your Xcode project using CocoaPods, specify i
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'JNMultipleImages'
+pod 'JNMultipleImages'
 end
 ```
 
@@ -54,21 +54,27 @@ $ pod install
 2. Add refrence for it in the view controller.
 
 3. Change Attributes:
- 
- * You can change count label attributes by accessing it directly from the JNMultipleImages reference.
- * delegate : this delegate confirm to JNMultipleImagesViewDelegate.
+
+* You can change count label attributes by accessing it directly from the JNMultipleImages reference.
+* delegate : this delegate confirm to JNMultipleImagesViewDelegate.
 
 4. Call setup method:
- 
+
+Setup with JNImage array
 ```swift
 func setup(images : [JNImage] , countLabelPosition : JNMultipleImagesCountLabelPosition , placeHolderImage : UIImage?, itemsMargin : CGFloat)
 ```
- ##### parameters
- * images : The images array to load.
- * countLabelPosition : The position for the count label (Fill view or fill last bottom right item).
- * placeHolderImage : The placeholder image to use for failed images.
- * itemsMargin : The margin between items.
- 
+
+Setup with array of any which might be Url String or UIImage
+```swift
+func setup(images : [Any] , countLabelPosition : JNMultipleImagesCountLabelPosition , placeHolderImage : UIImage?, itemsMargin : CGFloat)
+```
+##### parameters
+* images : The images array to load.
+* countLabelPosition : The position for the count label (Fill view or fill last bottom right item).
+* placeHolderImage : The placeholder image to use for failed images.
+* itemsMargin : The margin between items.
+
 > The library will adjust the UIImageViews content mode automatically like the follows :
 > * If the image dimensions is smaller than the image view dimensions then the content mode is aspectFill
 > * If image width and height ratio less than the image view width and height ration then the content mode is aspectFill
@@ -82,3 +88,4 @@ Jayel Zaghmoutt & Mohammad Nabulsi
 ## License
 
 JNMultipleImages is available under the MIT license. See the [LICENSE](https://github.com/JNDisrupter/JNMultipleImages/blob/master/LICENSE) file for more info.
+

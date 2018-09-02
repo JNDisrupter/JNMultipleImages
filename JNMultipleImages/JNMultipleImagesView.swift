@@ -157,6 +157,19 @@ open class JNMultipleImagesView: UIView {
     }
     
     /**
+     Get media view at index
+     - Parameter index: Media view index
+     - Returns: Imageview at index.
+     */
+    public func getMediaView(at index: Int) -> UIImageView? {
+        if self.imagesContainerView.subviews.count > index {
+            return self.imagesContainerView.subviews[index] as? UIImageView
+        }
+        
+        return nil
+    }
+    
+    /**
      Setup multiple images view
      - parameter images: The images array to load which might be string or UIImage
      - parameter countLabelPosition: count label position

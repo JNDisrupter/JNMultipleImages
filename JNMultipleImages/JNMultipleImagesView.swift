@@ -35,6 +35,9 @@ open class JNMultipleImagesView: UIView {
     /// Count label
     @IBOutlet public weak var countLabel: UILabel!
     
+    /// Images content mode
+    public var imagesContentMode: UIViewContentMode?
+    
     /// Delegate
     public weak var delegate : JNMultipleImagesViewDelegate?
     
@@ -368,7 +371,13 @@ open class JNMultipleImagesView: UIView {
      - parameter image : The UIImage to scale
      - parameter mediaView : The UIImageView thats will to be adjusted
      */
-    private func adjustImageViewContentModeAccordingToImage(image : UIImage , mediaView : UIImageView) {
+    private func adjustImageViewContentModeAccordingToImage(image: UIImage, mediaView: UIImageView) {
+        
+        // Check if there is content mode set
+        if let imagesContentMode = self.imagesContentMode {
+            mediaView.contentMode = imagesContentMode
+            return
+        }
         
         let heightInPoints = image.size.height
         let heightInPixels = heightInPoints * image.scale

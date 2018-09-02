@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "JNMultipleImages"
-  s.version      = "2.0.0"
+  s.version      = "2.0.1"
   s.summary      = "summery of JNMultipleImages."
   s.description  = 'Library for multiple images in one container view like facebook posts.'
   s.homepage     = "https://github.com/JNDisrupter"

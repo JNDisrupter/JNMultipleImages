@@ -36,7 +36,7 @@ open class JNMultipleImagesView: UIView {
     @IBOutlet public weak var countLabel: UILabel!
     
     /// Images content mode
-    public var imagesContentMode: UIViewContentMode?
+    public var imagesContentMode: UIView.ContentMode?
     
     /// Delegate
     public weak var delegate : JNMultipleImagesViewDelegate?
@@ -322,7 +322,7 @@ open class JNMultipleImagesView: UIView {
         } else if !mediaItem.url.isEmpty , let url = URL(string: mediaItem.url) {
             
             // Load image
-            mediaView.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.gray)
+            mediaView.sd_setIndicatorStyle(UIActivityIndicatorView.Style.gray)
             mediaView.sd_setShowActivityIndicatorView(true)
             
             // Set image
@@ -393,15 +393,15 @@ open class JNMultipleImagesView: UIView {
         if firstCondition || secondCondtion || thirdCondition {
             
             // Set content mode
-            mediaView.contentMode = UIViewContentMode.scaleAspectFill
+            mediaView.contentMode = UIView.ContentMode.scaleAspectFill
         } else if widthInPoints > heightInPixels && heightInPixels < mediaView.frame.size.height {
             
             // Set content mode
-            mediaView.contentMode = UIViewContentMode.topRight
+            mediaView.contentMode = UIView.ContentMode.topRight
         } else {
             
             // Set content mode
-            mediaView.contentMode = UIViewContentMode.scaleAspectFit
+            mediaView.contentMode = UIView.ContentMode.scaleAspectFit
         }
         
         // Layout media view

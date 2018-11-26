@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.source_files = "JNMultipleImages/**/*.{swift}"
   s.resources = "JNMultipleImages/**/*.{png,jpeg,jpg,storyboard,xib,xcassets}"
   s.framework  = "UIKit"
-  s.dependency 'SDWebImage'
+  s.dependency 'SDWebImage','~> 4.4.2'
   s.screenshots  = [ 'https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages1.gif','https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages2.gif','https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages3.gif','https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages4.gif','https://github.com/JNDisrupter/JNMultipleImages/raw/master/Images/JNMultipleImages5.gif']
 end

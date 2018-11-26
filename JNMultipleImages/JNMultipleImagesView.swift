@@ -190,7 +190,7 @@ open class JNMultipleImagesView: UIView {
             
             // Create JNImage instance
             if mediaItem is UIImage || mediaItem is String {
-             
+                
                 let jnImage = JNImage()
                 
                 if let mediaItem = mediaItem as? UIImage {
@@ -431,6 +431,9 @@ open class JNMultipleImagesView: UIView {
                 view.topAnchor.constraint(equalTo: self.imagesContainerView.topAnchor).isActive = true
                 view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
                 view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
+                let imageViewHeight = view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor)
+                imageViewHeight.priority = UILayoutPriority.defaultHigh
+                imageViewHeight.isActive = true
                 
             } else if views.count == 2 {
                 
@@ -447,46 +450,56 @@ open class JNMultipleImagesView: UIView {
                 
                 // Add width constraints
                 view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
+                
+                // Add height constraints
+                let imageViewHeight = view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1 , constant: 0)
+                imageViewHeight.priority = UILayoutPriority.defaultHigh
+                imageViewHeight.isActive = true
+                
             } else if views.count == 3 {
                 
                 // Check if first item
                 if index == 0 {
                     
                     // Add constraints
-                    view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
                     view.topAnchor.constraint(equalTo: self.imagesContainerView.topAnchor).isActive = true
+                    view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
                     view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
+                    view.bottomAnchor.constraint(equalTo: views[1].topAnchor, constant: -itemsMargin).isActive = true
                     
                     // Add height constraints
-                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
+                    let imageViewHeight = view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2)
+                    imageViewHeight.priority = UILayoutPriority.defaultHigh
+                    imageViewHeight.isActive = true
                 } else if index == 1 {
                     
                     // Add constraints
-                    view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
                     view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
-                    
-                    // Get first view
-                    let firstView = views[0]
-                    
-                    // Add leading constraint
-                    view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
+                    view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
                     
                     // Add width constraints
                     view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
+                    
+                    // Add height constraints
+                    let imageViewHeight = view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3, constant: -itemsMargin / 2)
+                    imageViewHeight.priority = UILayoutPriority.defaultHigh
+                    imageViewHeight.isActive = true
                 } else if index == 2 {
                     
                     // Add constraints
                     view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
                     view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
                     
-                    // Get first view
-                    let firstView = views[0]
-                    
-                    // Add leading constraint
-                    view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
-                    
                     // Add width constraints
                     view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
+                    
+                    // Add height constraints
+                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3, constant: -itemsMargin / 2).isActive = true
+                    
+                    // Add height constraints
+                    let imageViewHeight = view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3, constant: -itemsMargin / 2)
+                    imageViewHeight.priority = UILayoutPriority.defaultHigh
+                    imageViewHeight.isActive = true
                 }
             } else if views.count == 4 {
                 
@@ -497,21 +510,18 @@ open class JNMultipleImagesView: UIView {
                     view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
                     view.topAnchor.constraint(equalTo: self.imagesContainerView.topAnchor).isActive = true
                     view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
+                    view.bottomAnchor.constraint(equalTo: views[1].topAnchor).isActive = true
                     
                     // Add height constraints
-                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
+                    let imageViewHeight = view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2)
+                    imageViewHeight.priority = UILayoutPriority.defaultHigh
+                    imageViewHeight.isActive = true
                 } else {
                     
                     // Add constraints
                     view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
                     
-                    // Get first view
-                    let firstView = views[0]
-                    
-                    // Add leading constraint
-                    view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
-                    
-                    // Add width constraints
+                   // Add width constraints
                     view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3 , constant:-itemsMargin / 2).isActive = true
                     
                     if index == 1 {
@@ -526,6 +536,11 @@ open class JNMultipleImagesView: UIView {
                         // Add top constraint
                         view.leftAnchor.constraint(equalTo: previousView.rightAnchor, constant: itemsMargin).isActive = true
                     }
+                    
+                    // Add height constraints
+                    let imageViewHeight = view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3, constant: -itemsMargin / 2)
+                    imageViewHeight.priority = UILayoutPriority.defaultHigh
+                    imageViewHeight.isActive = true
                 }
             }
         }

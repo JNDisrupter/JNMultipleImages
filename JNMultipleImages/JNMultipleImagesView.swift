@@ -140,10 +140,10 @@ open class JNMultipleImagesView: UIView {
     public func clearImagesCache() {
         
         // Clear memory cache
-        SDImageCache.shared().clearMemory()
+        SDImageCache.shared.clearMemory()
         
         // Clear disk cache
-        SDImageCache.shared().clearDisk()
+        SDImageCache.shared.clearDisk()
     }
     
     /**
@@ -322,8 +322,7 @@ open class JNMultipleImagesView: UIView {
         } else if !mediaItem.url.isEmpty , let url = URL(string: mediaItem.url) {
             
             // Load image
-            mediaView.sd_setIndicatorStyle(UIActivityIndicatorView.Style.gray)
-            mediaView.sd_setShowActivityIndicatorView(true)
+            mediaView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             
             // Set image
             mediaView.sd_setImage(with: url, placeholderImage: imagesPlaceHolder, options: [], completed: { (image, error, cashe, url) in

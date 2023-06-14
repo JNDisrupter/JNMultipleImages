@@ -15,9 +15,9 @@
 
 ## Requirements
 
-- iOS 9.0+ / macOS 10.10+
-- Xcode 9.0+
-- Swift 4+
+- iOS 11.0+ / macOS 12.3+
+- Xcode 14.0+
+- Swift 5.7+
 
 ## Installation
 
@@ -62,18 +62,20 @@ $ pod install
 
 Setup with JNImage array
 ```swift
-func setup(images : [JNImage] , countLabelPosition : JNMultipleImagesCountLabelPosition , placeHolderImage : UIImage?, itemsMargin : CGFloat)
+setup(images: [JNImage], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin : CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0)
 ```
 
 Setup with array of any which might be Url String or UIImage
 ```swift
-func setup(images : [Any] , countLabelPosition : JNMultipleImagesCountLabelPosition , placeHolderImage : UIImage?, itemsMargin : CGFloat)
+func setup(images: [Any], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0)
 ```
 ##### parameters
 * images : The images array to load.
-* countLabelPosition : The position for the count label (Fill view or fill last bottom right item).
+* countLabelPosition : The position for the count label (Fill view or fill last item).
 * placeHolderImage : The placeholder image to use for failed images.
 * itemsMargin : The margin between items.
+* style : The style of the view, it can be collection or a stack(horizental).
+* cornerRadius : corner radius for images.
 
 > The library will adjust the UIImageViews content mode automatically like the follows :
 > * If the image dimensions is smaller than the image view dimensions then the content mode is aspectFill

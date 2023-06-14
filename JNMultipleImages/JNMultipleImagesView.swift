@@ -9,21 +9,43 @@
 import UIKit
 import SDWebImage
 
-/**
- Count Label Position.
- 
- ````
- case fullScreen
- case bottomRight
- ````
- */
-public enum JNMultipleImagesCountLabelPosition {
+// MARK: -
+extension JNMultipleImagesView {
     
-    /// Show label on the whole view.
-    case fullScreen
+    /**
+     Count Label Position.
+     
+     ````
+     case fullScreen
+     case bottomRight
+     case onLastItem
+     ````
+     */
+    public enum JNMultipleImagesCountLabelPosition {
+        
+        /// Show label on the whole view.
+        case fullScreen
+        
+        /// Last item
+        case lastItem
+    }
     
-    /// Show label only on the bottom right image.
-    case bottomRight
+    /**
+     Style
+     
+     ````
+     case collection
+     case stack
+     ````
+     */
+    public enum style {
+        
+        /// Collection, shows as a collection
+        case collection
+        
+        /// Stack horezintally or vertically
+        case stack
+    }
 }
 
 /// Multiple images view
@@ -40,6 +62,9 @@ open class JNMultipleImagesView: UIView {
     
     /// Delegate
     public weak var delegate : JNMultipleImagesViewDelegate?
+    
+    /// Corner radius
+    private var cornerRadius: CGFloat = 0
     
     /**
      Loads a view instance from the xib file
@@ -89,8 +114,14 @@ open class JNMultipleImagesView: UIView {
                 
                 // Adjust image view content mode according to size
                 self.adjustImageViewContentModeAccordingToImage(image: image, mediaView: view)
+                
+                // Corner radius
+                view.layer.cornerRadius = self.cornerRadius
             }
         }
+        
+        // Corner radius
+        self.countLabel.layer.cornerRadius = self.cornerRadius
     }
     
     /**
@@ -178,51 +209,66 @@ open class JNMultipleImagesView: UIView {
      - parameter countLabelPosition: count label position
      - parameter placeHolderImage: place holder image to use when failed to load image
      - parameter itemsMargin: The margin between images
+     - parameter style: displaying image style
+     - parameter cornerRadius: corner radius value
      */
-    public func setup(images : [Any] , countLabelPosition : JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.bottomRight , placeHolderImage : UIImage? = nil , itemsMargin : CGFloat = 2.0) {
+    public func setup(images: [Any], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0) {
         
         // Reset view
         self.resetView()
         
-        var count = 0
+        // Set corner radius
+        self.cornerRadius = cornerRadius
         
-        for mediaItem in images {
+        // Max number of views
+        var maxNumberOfViews = 4
+        
+        switch style {
+        case .collection:
+            maxNumberOfViews = 4
+        case .stack:
+            maxNumberOfViews = 3
+        }
+        
+        for (index, media) in images.enumerated() {
             
-            // Create JNImage instance
-            if mediaItem is UIImage || mediaItem is String {
-             
-                let jnImage = JNImage()
-                
-                if let mediaItem = mediaItem as? UIImage {
-                    jnImage.image = mediaItem
-                } else if let mediaItem = mediaItem as? String {
-                    jnImage.url = mediaItem
-                }
-                
-                // Create media view
-                let mediaView = self.createMediaView(mediaItem: jnImage,placeHolderImage: placeHolderImage)
-                
-                // Set media view tag
-                mediaView.tag = count
-                
-                // Add media view
-                self.imagesContainerView.addSubview(mediaView)
-                
-                // Increment count
-                count += 1
+            let jnImage = JNImage()
+            
+            // JNImage
+            if let mediaItem = media as? UIImage {
+                jnImage.image = mediaItem
+               
+            // String for urls
+            } else if let mediaItem = media as? String {
+                jnImage.url = mediaItem
+            } else {
+                assertionFailure("Item is not string nor JNImage")
             }
             
+            // Create media view
+            let mediaView = self.createMediaView(mediaItem: jnImage, placeHolderImage: placeHolderImage)
+            
+            // Set media view tag
+            mediaView.tag = index
+            
+            // Add media view
+            self.imagesContainerView.addSubview(mediaView)
+            
             // Check if 4 items created break loop
-            if self.imagesContainerView.subviews.count == 4 {
+            if self.imagesContainerView.subviews.count == maxNumberOfViews {
                 break
             }
         }
         
         // Setup count label
-        self.setupCountLabel(totalMediaItemsCount: images.count,countLabelPosition: countLabelPosition)
+        if images.count > maxNumberOfViews {
+            
+            // Setup count label
+            self.setupCountLabel(remainingCount: images.count - maxNumberOfViews, countLabelPosition: countLabelPosition, style: style)
+        }
         
         // Add constraints
-        self.addConstraints(itemsMargin: itemsMargin)
+        self.addConstraints(itemsMargin: itemsMargin, style: style)
     }
     
     /**
@@ -231,59 +277,73 @@ open class JNMultipleImagesView: UIView {
      - parameter countLabelPosition: count label position
      - parameter placeHolderImage: place holder image to use when failed to load image
      - parameter itemsMargin: The margin between images
+     - parameter style: displaying image style
+     - parameter cornerRadius: corner radius value
      */
-    public func setup(images : [JNImage] , countLabelPosition : JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.bottomRight , placeHolderImage : UIImage? = nil , itemsMargin : CGFloat = 2.0) {
+    public func setup(images: [JNImage], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin : CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0) {
         
         // Reset view
         self.resetView()
         
-        var count = 0
+        // Set corner radius
+        self.cornerRadius = cornerRadius
         
-        for mediaItem in images {
+        // Max number of views
+        var maxNumberOfViews = 4
+        
+        switch style {
+        case .collection:
+            maxNumberOfViews = 4
+        case .stack:
+            maxNumberOfViews = 3
+        }
+        
+        for (index, media) in images.enumerated() {
             
             // Create media view
-            let mediaView = self.createMediaView(mediaItem: mediaItem,placeHolderImage: placeHolderImage)
+            let mediaView = self.createMediaView(mediaItem: media, placeHolderImage: placeHolderImage)
             
             // Set media view tag
-            mediaView.tag = count
+            mediaView.tag = index
             
             // Add media view
             self.imagesContainerView.addSubview(mediaView)
             
-            // Increment count
-            count += 1
-            
-            // Check if 4 items created break loop
-            if self.imagesContainerView.subviews.count == 4 {
+            // Check if reached last shown index
+            if index  == maxNumberOfViews - 1 {
                 break
             }
         }
         
         // Setup count label
-        self.setupCountLabel(totalMediaItemsCount: images.count,countLabelPosition: countLabelPosition)
+        if images.count > maxNumberOfViews {
+            
+            // Setup count label
+            self.setupCountLabel(remainingCount: images.count - maxNumberOfViews, countLabelPosition: countLabelPosition, style: style)
+        }
         
         // Add constraints
-        self.addConstraints(itemsMargin: itemsMargin)
+        self.addConstraints(itemsMargin: itemsMargin, style: style)
     }
     
     /**
      Setup count label
-     - parameter totalMediaItemsCount: The total count of the media array
+     - parameter remainingCount: remaining count
      - parameter countLabelPosition: count label position
+     - parameter style: JNMultiple images style
      */
-    private func setupCountLabel(totalMediaItemsCount:Int,countLabelPosition : JNMultipleImagesCountLabelPosition) {
+    private func setupCountLabel(remainingCount: Int, countLabelPosition: JNMultipleImagesCountLabelPosition, style: JNMultipleImagesView.style) {
         
-        // Add count label if number of item more than the limit
-        if totalMediaItemsCount > 4 {
-            
-            // Setup count label
-            let numberOfExtraMedia = totalMediaItemsCount - 4
-            self.countLabel.text = "+" + numberOfExtraMedia.description
-            self.countLabel.isHidden = false
-            
-            // Add count label constraint
-            self.addCountLabelConstraint(countLabelPosition: countLabelPosition)
-        }
+        // Setup count label
+        let remainingCount = remainingCount > 99 ? 99 : remainingCount
+        self.countLabel.text = "+" + remainingCount.description
+        self.countLabel.isHidden = false
+        
+        // Corner radius
+        self.countLabel.layer.cornerRadius = self.cornerRadius
+        
+        // Add count label constraint
+        self.addCountLabelConstraint(countLabelPosition: countLabelPosition)
     }
     
     /**
@@ -359,6 +419,9 @@ open class JNMultipleImagesView: UIView {
             self.adjustImageViewContentModeAccordingToImage(image: image, mediaView: mediaView)
         }
         
+        // Set corner radius
+        mediaView.layer.cornerRadius = self.cornerRadius
+        
         // Clip to bounds
         mediaView.clipsToBounds = true
         
@@ -410,8 +473,9 @@ open class JNMultipleImagesView: UIView {
     /**
      Add constraints
      - parameter itemsMargin : Margin between images
+     - parameter style : displaying images style
      */
-    private func addConstraints(itemsMargin : CGFloat ) {
+    private func addConstraints(itemsMargin: CGFloat, style: JNMultipleImagesView.style) {
         
         // Get views
         let views = self.imagesContainerView.subviews
@@ -445,47 +509,69 @@ open class JNMultipleImagesView: UIView {
                 }
                 
                 // Add width constraints
-                view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
+                view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant: -itemsMargin / 2).isActive = true
             } else if views.count == 3 {
                 
-                // Check if first item
-                if index == 0 {
+                switch style {
+                case .stack:
                     
                     // Add constraints
-                    view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
                     view.topAnchor.constraint(equalTo: self.imagesContainerView.topAnchor).isActive = true
-                    view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
-                    
-                    // Add height constraints
-                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
-                } else if index == 1 {
-                    
-                    // Add constraints
                     view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
-                    view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
                     
-                    // Get first view
-                    let firstView = views[0]
-                    
-                    // Add leading constraint
-                    view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
+                    // Check if first item
+                    if index == 0 {
+                        view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
+                    } else if index == 1 {
+                        view.centerXAnchor.constraint(equalTo: self.imagesContainerView.centerXAnchor).isActive = true
+                    } else if index == 2 {
+                        view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
+                    }
                     
                     // Add width constraints
-                    view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
-                } else if index == 2 {
+                    view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3 , constant: -itemsMargin / 3).isActive = true
                     
-                    // Add constraints
-                    view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
-                    view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
+                case .collection:
                     
-                    // Get first view
-                    let firstView = views[0]
-                    
-                    // Add leading constraint
-                    view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
-                    
-                    // Add width constraints
-                    view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
+                    // Check if first item
+                    if index == 0 {
+                        
+                        // Add constraints
+                        view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
+                        view.topAnchor.constraint(equalTo: self.imagesContainerView.topAnchor).isActive = true
+                        view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
+                        
+                        // Add height constraints
+                        view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
+                    } else if index == 1 {
+                        
+                        // Add constraints
+                        view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
+                        view.leadingAnchor.constraint(equalTo: self.imagesContainerView.leadingAnchor).isActive = true
+                        
+                        // Get first view
+                        let firstView = views[0]
+                        
+                        // Add leading constraint
+                        view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
+                        
+                        // Add width constraints
+                        view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
+                    } else if index == 2 {
+                        
+                        // Add constraints
+                        view.bottomAnchor.constraint(equalTo: self.imagesContainerView.bottomAnchor).isActive = true
+                        view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
+                        
+                        // Get first view
+                        let firstView = views[0]
+                        
+                        // Add leading constraint
+                        view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
+                        
+                        // Add width constraints
+                        view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 0.5 , constant:-itemsMargin / 2).isActive = true
+                    }
                 }
             } else if views.count == 4 {
                 
@@ -534,32 +620,30 @@ open class JNMultipleImagesView: UIView {
      Add count label constraint
      - parameter countLabelPosition : Count label position
      */
-    private func addCountLabelConstraint(countLabelPosition : JNMultipleImagesCountLabelPosition) {
+    private func addCountLabelConstraint(countLabelPosition: JNMultipleImagesCountLabelPosition) {
         
         // Get views
         let views = self.imagesContainerView.subviews
         
-        // Check if there is 4 view
-        if views.count == 4 {
-            
-            // Set translate auto sizing mask
-            self.countLabel.translatesAutoresizingMaskIntoConstraints = false
-            
-            var targetView = self.imagesContainerView!
-            
-            // Check count label position
-            if countLabelPosition == JNMultipleImagesCountLabelPosition.bottomRight {
-                
-                // Set target view
-                targetView = views[3]
-            }
-            
-            // Add constraints
-            self.countLabel.leadingAnchor.constraint(equalTo: targetView.leadingAnchor).isActive = true
-            self.countLabel.topAnchor.constraint(equalTo: targetView.topAnchor).isActive = true
-            self.countLabel.bottomAnchor.constraint(equalTo: targetView.bottomAnchor).isActive = true
-            self.countLabel.trailingAnchor.constraint(equalTo: targetView.trailingAnchor).isActive = true
+        // Set translate auto sizing mask
+        self.countLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        var targetView = self.imagesContainerView!
+        
+        // Check count label position
+        switch countLabelPosition {
+        case.lastItem:
+            targetView = views.last ?? self.imagesContainerView!
+        case .fullScreen:
+            break
         }
+        
+        // Add constraints
+        self.countLabel.clipsToBounds = true
+        self.countLabel.leadingAnchor.constraint(equalTo: targetView.leadingAnchor).isActive = true
+        self.countLabel.topAnchor.constraint(equalTo: targetView.topAnchor).isActive = true
+        self.countLabel.bottomAnchor.constraint(equalTo: targetView.bottomAnchor).isActive = true
+        self.countLabel.trailingAnchor.constraint(equalTo: targetView.trailingAnchor).isActive = true
     }
 }
 

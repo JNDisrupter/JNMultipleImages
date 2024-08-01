@@ -577,7 +577,7 @@ open class JNMultipleImagesView: UIView {
                         view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
                         
                         // Add height constraints
-                        view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
+                        view.heightAnchor.constraint(equalTo: self.imagesContainerView.heightAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
                     } else if index == 1 {
                         
                         // Add constraints
@@ -619,7 +619,7 @@ open class JNMultipleImagesView: UIView {
                     view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
                     
                     // Add height constraints
-                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
+                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.heightAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
                 } else {
                     
                     // Add constraints

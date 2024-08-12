@@ -632,7 +632,7 @@ open class JNMultipleImagesView: UIView {
                     view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
                     
                     // Add width constraints
-                    view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3 , constant:-itemsMargin / 2).isActive = true
+                    view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3 , constant:-itemsMargin * 2/3).isActive = true
                     
                     if index == 1 {
                         

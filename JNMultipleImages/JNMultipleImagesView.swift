@@ -192,7 +192,7 @@ open class JNMultipleImagesView: UIView {
         if let mediaView = gestureRecognizer.view as? UIImageView {
             
             // Call delegate
-            delegate?.jsMultipleImagesView?(didClickItem: mediaView.tag)
+            delegate?.jnMultipleImagesView?(didClickItem: mediaView.tag, for: self)
         }
     }
     
@@ -423,7 +423,7 @@ open class JNMultipleImagesView: UIView {
                     
                     // Call delegate
                     if self.delegate != nil {
-                        self.delegate?.jsMultipleImagesView?(failedToLoadImage: imageUrl.absoluteString, error: error)
+                        self.delegate?.jnMultipleImagesView?(failedToLoadImage: imageUrl.absoluteString, error: error)
                     }
                 } else if let image = image , let imageUrl = url {
                     
@@ -432,7 +432,7 @@ open class JNMultipleImagesView: UIView {
                     
                     // Call delegate
                     if self.delegate != nil {
-                        self.delegate?.jsMultipleImagesView?(didLoadImage: imageUrl.absoluteString, image: image)
+                        self.delegate?.jnMultipleImagesView?(didLoadImage: imageUrl.absoluteString, image: image)
                     }
                 }
                 
@@ -690,18 +690,18 @@ open class JNMultipleImagesView: UIView {
      - parameter imageUrl: The image url for the loaded image
      - parameter image: The uiimage object that have been loaded
      */
-    @objc optional func jsMultipleImagesView(didLoadImage imageUrl : String , image : UIImage)
+    @objc optional func jnMultipleImagesView(didLoadImage imageUrl : String , image : UIImage)
     
     /**
      Failed to load image
      - parameter imageUrl: The image url
      - parameter error: The error
      */
-    @objc optional func jsMultipleImagesView(failedToLoadImage imageUrl : String , error : Error)
+    @objc optional func jnMultipleImagesView(failedToLoadImage imageUrl : String , error : Error)
     
     /**
      Did click item at index
      - parameter atIndex: The clicked item index
      */
-    @objc optional func jsMultipleImagesView(didClickItem atIndex : Int)
+    @objc optional func jnMultipleImagesView(didClickItem atIndex : Int, for multipleImagesView: JNMultipleImagesView)
 }

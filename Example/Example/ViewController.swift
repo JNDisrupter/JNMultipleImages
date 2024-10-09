@@ -66,11 +66,11 @@ class ViewController: UIViewController {
         }
         
         // Setup multiple images view
-        self.multipleImagesView.setup(images: imagesArray, countLabelPosition: itemIndex > 4 ? JNMultipleImagesView.JNMultipleImagesCountLabelPosition.fullScreen : JNMultipleImagesView.JNMultipleImagesCountLabelPosition.lastItem, style: self.selectedMultipleImagesViewStyle, cornerRadius: 0.0)
+        self.multipleImagesView.setup(images: imagesArray, countLabelPosition: itemIndex > 4 ? JNMultipleImagesView.JNMultipleImagesCountLabelPosition.fullScreen : JNMultipleImagesView.JNMultipleImagesCountLabelPosition.lastItem, style: self.selectedMultipleImagesViewStyle, cornerRadius: 10.0, borderColor: UIColor.lightGray, borderWidth: 1.0)
         
         // Add border to multiple images view
-        self.multipleImagesView.layer.borderWidth = 2
-        self.multipleImagesView.layer.borderColor = UIColor.gray.cgColor
+        //self.multipleImagesView.layer.borderWidth = 2
+        //self.multipleImagesView.layer.borderColor = UIColor.gray.cgColor
         
         // Setup count label
         self.multipleImagesView.countLabel.backgroundColor = UIColor.init(white: 0, alpha: 0.5)

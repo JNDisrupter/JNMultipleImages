@@ -63,8 +63,8 @@ open class JNMultipleImagesView: UIView {
     /// Delegate
     public weak var delegate : JNMultipleImagesViewDelegate?
     
-    /// Corner radius
-    private var cornerRadius: CGFloat = 0
+    /// Multiple images view configuration
+    private(set) var configuration: JNMultipleImagesViewConfiguration!
     
     /**
      Loads a view instance from the xib file
@@ -116,12 +116,18 @@ open class JNMultipleImagesView: UIView {
                 self.adjustImageViewContentModeAccordingToImage(image: image, mediaView: view)
                 
                 // Corner radius
-                view.layer.cornerRadius = self.cornerRadius
+                view.layer.cornerRadius = self.configuration.cornerRadius
+                
+                // Set border color
+                view.layer.borderColor = self.configuration.borderColor.cgColor
+                
+                // set border width
+                view.layer.borderWidth = self.configuration.borderWidth
             }
         }
         
         // Corner radius
-        self.countLabel.layer.cornerRadius = self.cornerRadius
+        self.countLabel.layer.cornerRadius = self.configuration.cornerRadius
     }
     
     /**
@@ -186,7 +192,7 @@ open class JNMultipleImagesView: UIView {
         if let mediaView = gestureRecognizer.view as? UIImageView {
             
             // Call delegate
-            delegate?.jsMultipleImagesView?(didClickItem: mediaView.tag)
+            delegate?.jnMultipleImagesView?(didClickItem: mediaView.tag, for: self)
         }
     }
     
@@ -206,24 +212,71 @@ open class JNMultipleImagesView: UIView {
     /**
      Setup multiple images view
      - parameter images: The images array to load which might be string or UIImage
-     - parameter countLabelPosition: count label position
-     - parameter placeHolderImage: place holder image to use when failed to load image
-     - parameter itemsMargin: The margin between images
-     - parameter style: displaying image style
-     - parameter cornerRadius: corner radius value
+     - parameter configuration: Multiple images view configuration
      */
-    public func setup(images: [Any], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0) {
+    public func setup(images: [JNImage], configuration: JNMultipleImagesViewConfiguration) {
         
         // Reset view
         self.resetView()
         
-        // Set corner radius
-        self.cornerRadius = cornerRadius
+        // Set configuration
+        self.configuration = configuration
         
         // Max number of views
         var maxNumberOfViews = 4
         
-        switch style {
+        switch configuration.style {
+        case .collection:
+            maxNumberOfViews = 4
+        case .stack:
+            maxNumberOfViews = 3
+        }
+        
+        for (index, media) in images.enumerated() {
+            
+            // Create media view
+            let mediaView = self.createMediaView(mediaItem: media, placeHolderImage: configuration.placeHolderImage)
+            
+            // Set media view tag
+            mediaView.tag = index
+            
+            // Add media view
+            self.imagesContainerView.addSubview(mediaView)
+            
+            // Check if reached last shown index
+            if index  == maxNumberOfViews - 1 {
+                break
+            }
+        }
+        
+        // Setup count label
+        if images.count > maxNumberOfViews {
+            
+            // Setup count label
+            self.setupCountLabel(remainingCount: images.count - maxNumberOfViews, countLabelPosition: configuration.countLabelPosition, style: configuration.style)
+        }
+        
+        // Add constraints
+        self.addConstraints(itemsMargin: configuration.itemsMargin, style: configuration.style)
+    }
+    
+    /**
+     Setup multiple images view
+     - parameter images: The NJImage array to load
+     - parameter configuration: Multiple images view configuration
+     */
+    public func setup(images: [Any], configuration: JNMultipleImagesViewConfiguration) {
+        
+        // Reset view
+        self.resetView()
+        
+        // Set configuration
+        self.configuration = configuration
+        
+        // Max number of views
+        var maxNumberOfViews = 4
+        
+        switch configuration.style {
         case .collection:
             maxNumberOfViews = 4
         case .stack:
@@ -246,7 +299,7 @@ open class JNMultipleImagesView: UIView {
             }
             
             // Create media view
-            let mediaView = self.createMediaView(mediaItem: jnImage, placeHolderImage: placeHolderImage)
+            let mediaView = self.createMediaView(mediaItem: jnImage, placeHolderImage: configuration.placeHolderImage)
             
             // Set media view tag
             mediaView.tag = index
@@ -264,11 +317,27 @@ open class JNMultipleImagesView: UIView {
         if images.count > maxNumberOfViews {
             
             // Setup count label
-            self.setupCountLabel(remainingCount: images.count - maxNumberOfViews, countLabelPosition: countLabelPosition, style: style)
+            self.setupCountLabel(remainingCount: images.count - maxNumberOfViews, countLabelPosition: configuration.countLabelPosition, style: configuration.style)
         }
         
         // Add constraints
-        self.addConstraints(itemsMargin: itemsMargin, style: style)
+        self.addConstraints(itemsMargin: configuration.itemsMargin, style: configuration.style)
+    }
+    
+    /**
+     Setup multiple images view
+     - parameter images: The images array to load which might be string or UIImage
+     - parameter countLabelPosition: count label position
+     - parameter placeHolderImage: place holder image to use when failed to load image
+     - parameter itemsMargin: The margin between images
+     - parameter style: displaying image style
+     - parameter cornerRadius: corner radius value
+     - Parameter borderColor: border color
+     - Parameter borderWidth: border width value
+     */
+    public func setup(images: [Any], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0) {
+     
+        self.setup(images: images, configuration: JNMultipleImagesViewConfiguration(countLabelPosition: countLabelPosition, itemsMargin: itemsMargin, style: style, cornerRadius: cornerRadius, borderColor: borderColor, borderWidth: borderWidth))
     }
     
     /**
@@ -279,53 +348,13 @@ open class JNMultipleImagesView: UIView {
      - parameter itemsMargin: The margin between images
      - parameter style: displaying image style
      - parameter cornerRadius: corner radius value
+     - Parameter borderColor: border color
+     - Parameter borderWidth: border width value
      */
-    public func setup(images: [JNImage], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin : CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0) {
+    public func setup(images: [JNImage], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin : CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0) {
         
-        // Reset view
-        self.resetView()
-        
-        // Set corner radius
-        self.cornerRadius = cornerRadius
-        
-        // Max number of views
-        var maxNumberOfViews = 4
-        
-        switch style {
-        case .collection:
-            maxNumberOfViews = 4
-        case .stack:
-            maxNumberOfViews = 3
-        }
-        
-        for (index, media) in images.enumerated() {
-            
-            // Create media view
-            let mediaView = self.createMediaView(mediaItem: media, placeHolderImage: placeHolderImage)
-            
-            // Set media view tag
-            mediaView.tag = index
-            
-            // Add media view
-            self.imagesContainerView.addSubview(mediaView)
-            
-            // Check if reached last shown index
-            if index  == maxNumberOfViews - 1 {
-                break
-            }
-        }
-        
-        // Setup count label
-        if images.count > maxNumberOfViews {
-            
-            // Setup count label
-            self.setupCountLabel(remainingCount: images.count - maxNumberOfViews, countLabelPosition: countLabelPosition, style: style)
-        }
-        
-        // Add constraints
-        self.addConstraints(itemsMargin: itemsMargin, style: style)
+        self.setup(images: images, configuration: JNMultipleImagesViewConfiguration(countLabelPosition: countLabelPosition, itemsMargin: itemsMargin, style: style, cornerRadius: cornerRadius, borderColor: borderColor, borderWidth: borderWidth))
     }
-    
     /**
      Setup count label
      - parameter remainingCount: remaining count
@@ -340,7 +369,7 @@ open class JNMultipleImagesView: UIView {
         self.countLabel.isHidden = false
         
         // Corner radius
-        self.countLabel.layer.cornerRadius = self.cornerRadius
+        self.countLabel.layer.cornerRadius = self.configuration.cornerRadius
         
         // Add count label constraint
         self.addCountLabelConstraint(countLabelPosition: countLabelPosition)
@@ -394,7 +423,7 @@ open class JNMultipleImagesView: UIView {
                     
                     // Call delegate
                     if self.delegate != nil {
-                        self.delegate?.jsMultipleImagesView?(failedToLoadImage: imageUrl.absoluteString, error: error)
+                        self.delegate?.jnMultipleImagesView?(failedToLoadImage: imageUrl.absoluteString, error: error)
                     }
                 } else if let image = image , let imageUrl = url {
                     
@@ -403,7 +432,7 @@ open class JNMultipleImagesView: UIView {
                     
                     // Call delegate
                     if self.delegate != nil {
-                        self.delegate?.jsMultipleImagesView?(didLoadImage: imageUrl.absoluteString, image: image)
+                        self.delegate?.jnMultipleImagesView?(didLoadImage: imageUrl.absoluteString, image: image)
                     }
                 }
                 
@@ -420,7 +449,13 @@ open class JNMultipleImagesView: UIView {
         }
         
         // Set corner radius
-        mediaView.layer.cornerRadius = self.cornerRadius
+        mediaView.layer.cornerRadius = self.configuration.cornerRadius
+        
+        // Set border width
+        mediaView.layer.borderWidth = self.configuration.borderWidth
+        
+        // Set border color
+        mediaView.layer.borderColor = self.configuration.borderColor.cgColor
         
         // Clip to bounds
         mediaView.clipsToBounds = true
@@ -542,7 +577,7 @@ open class JNMultipleImagesView: UIView {
                         view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
                         
                         // Add height constraints
-                        view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
+                        view.heightAnchor.constraint(equalTo: self.imagesContainerView.heightAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
                     } else if index == 1 {
                         
                         // Add constraints
@@ -584,7 +619,7 @@ open class JNMultipleImagesView: UIView {
                     view.trailingAnchor.constraint(equalTo: self.imagesContainerView.trailingAnchor).isActive = true
                     
                     // Add height constraints
-                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
+                    view.heightAnchor.constraint(equalTo: self.imagesContainerView.heightAnchor, multiplier: 2/3, constant: -itemsMargin / 2).isActive = true
                 } else {
                     
                     // Add constraints
@@ -597,7 +632,7 @@ open class JNMultipleImagesView: UIView {
                     view.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: itemsMargin).isActive = true
                     
                     // Add width constraints
-                    view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3 , constant:-itemsMargin / 2).isActive = true
+                    view.widthAnchor.constraint(equalTo: self.imagesContainerView.widthAnchor, multiplier: 1/3 , constant:-itemsMargin * 2/3).isActive = true
                     
                     if index == 1 {
                         
@@ -655,18 +690,18 @@ open class JNMultipleImagesView: UIView {
      - parameter imageUrl: The image url for the loaded image
      - parameter image: The uiimage object that have been loaded
      */
-    @objc optional func jsMultipleImagesView(didLoadImage imageUrl : String , image : UIImage)
+    @objc optional func jnMultipleImagesView(didLoadImage imageUrl : String , image : UIImage)
     
     /**
      Failed to load image
      - parameter imageUrl: The image url
      - parameter error: The error
      */
-    @objc optional func jsMultipleImagesView(failedToLoadImage imageUrl : String , error : Error)
+    @objc optional func jnMultipleImagesView(failedToLoadImage imageUrl : String , error : Error)
     
     /**
      Did click item at index
      - parameter atIndex: The clicked item index
      */
-    @objc optional func jsMultipleImagesView(didClickItem atIndex : Int)
+    @objc optional func jnMultipleImagesView(didClickItem atIndex : Int, for multipleImagesView: JNMultipleImagesView)
 }

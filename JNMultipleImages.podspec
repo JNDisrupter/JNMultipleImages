@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name              = "JNMultipleImages"
-  s.version           = "2.0.5"
+  s.version           = "2.0.6"
   s.summary           = "summery of JNMultipleImages."
   s.description       = 'JNMultipleImages can be used to display multiple images in single view, it can be used in a newsfeed or posts. A single post can contain up to 4 displayed images, while showing a number with the remaining images if they are more than 4.'
   s.homepage          = "https://github.com/JNDisrupter"

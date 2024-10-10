@@ -21,7 +21,7 @@ public class JNMultipleImagesViewConfiguration {
     public var itemsMargin: CGFloat
     
     /// Style
-    public var style: JNMultipleImagesView.style
+    public var style: JNMultipleImagesView.Style
     
     /// Corner radius
     public var cornerRadius: CGFloat
@@ -43,7 +43,7 @@ public class JNMultipleImagesViewConfiguration {
      - Parameter borderColor: border color
      - Parameter borderWidth: border width value
      */
-    public init(countLabelPosition: JNMultipleImagesView.JNMultipleImagesCountLabelPosition, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat, style: JNMultipleImagesView.style, cornerRadius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
+    public init(countLabelPosition: JNMultipleImagesView.JNMultipleImagesCountLabelPosition, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat, style: JNMultipleImagesView.Style, cornerRadius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
         self.countLabelPosition = countLabelPosition
         self.placeHolderImage = placeHolderImage
         self.itemsMargin = itemsMargin

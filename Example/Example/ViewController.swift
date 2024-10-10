@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var styleSegmentControl: UISegmentedControl!
     
     /// Selected Multiple Images View Style
-    private var selectedMultipleImagesViewStyle: JNMultipleImagesView.style = .collection
+    private var selectedMultipleImagesViewStyle: JNMultipleImagesView.Style = .collection
     
     /// Item Index
     var itemIndex = 0

@@ -38,7 +38,7 @@ extension JNMultipleImagesView {
      case stack
      ````
      */
-    public enum style {
+    public enum Style {
         
         /// Collection, shows as a collection
         case collection
@@ -169,6 +169,9 @@ open class JNMultipleImagesView: UIView {
         // Reset Count label
         self.countLabel.isHidden = true
         self.countLabel.text = ""
+        
+        // init Configuration
+        self.configuration = JNMultipleImagesViewConfiguration(countLabelPosition: JNMultipleImagesCountLabelPosition.lastItem, itemsMargin: 2.0, style: JNMultipleImagesView.Style.collection, cornerRadius: 0.0, borderColor: .clear, borderWidth: 0.0)
     }
     
     /**
@@ -335,7 +338,7 @@ open class JNMultipleImagesView: UIView {
      - Parameter borderColor: border color
      - Parameter borderWidth: border width value
      */
-    public func setup(images: [Any], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0) {
+    public func setup(images: [Any], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin: CGFloat = 2.0, style: JNMultipleImagesView.Style = .collection, cornerRadius: CGFloat = 0, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0) {
      
         self.setup(images: images, configuration: JNMultipleImagesViewConfiguration(countLabelPosition: countLabelPosition, itemsMargin: itemsMargin, style: style, cornerRadius: cornerRadius, borderColor: borderColor, borderWidth: borderWidth))
     }
@@ -351,7 +354,7 @@ open class JNMultipleImagesView: UIView {
      - Parameter borderColor: border color
      - Parameter borderWidth: border width value
      */
-    public func setup(images: [JNImage], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin : CGFloat = 2.0, style: JNMultipleImagesView.style = .collection, cornerRadius: CGFloat = 0, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0) {
+    public func setup(images: [JNImage], countLabelPosition: JNMultipleImagesCountLabelPosition = JNMultipleImagesCountLabelPosition.lastItem, placeHolderImage: UIImage? = nil, itemsMargin : CGFloat = 2.0, style: JNMultipleImagesView.Style = .collection, cornerRadius: CGFloat = 0, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0) {
         
         self.setup(images: images, configuration: JNMultipleImagesViewConfiguration(countLabelPosition: countLabelPosition, itemsMargin: itemsMargin, style: style, cornerRadius: cornerRadius, borderColor: borderColor, borderWidth: borderWidth))
     }
@@ -361,7 +364,7 @@ open class JNMultipleImagesView: UIView {
      - parameter countLabelPosition: count label position
      - parameter style: JNMultiple images style
      */
-    private func setupCountLabel(remainingCount: Int, countLabelPosition: JNMultipleImagesCountLabelPosition, style: JNMultipleImagesView.style) {
+    private func setupCountLabel(remainingCount: Int, countLabelPosition: JNMultipleImagesCountLabelPosition, style: JNMultipleImagesView.Style) {
         
         // Setup count label
         let remainingCount = remainingCount > 99 ? 99 : remainingCount
@@ -510,7 +513,7 @@ open class JNMultipleImagesView: UIView {
      - parameter itemsMargin : Margin between images
      - parameter style : displaying images style
      */
-    private func addConstraints(itemsMargin: CGFloat, style: JNMultipleImagesView.style) {
+    private func addConstraints(itemsMargin: CGFloat, style: JNMultipleImagesView.Style) {
         
         // Get views
         let views = self.imagesContainerView.subviews

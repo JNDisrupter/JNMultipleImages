@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// Multiple images view configuration
 public class JNMultipleImagesViewConfiguration {

@@ -15,36 +15,14 @@
 
 ## Requirements
 
-- iOS 11.0+ / macOS 14.4+
-- Xcode 15.3+
+- iOS 12.0+ / macOS 15.7+
+- Xcode 26+
 - Swift 5.10+
 
-## Installation
+## Installation with Swift Package Manager
 
-### CocoaPods
+JNMultipleImages support SwiftPM. To use SwiftPM, you should use Xcode 26 to open your project. Click `File` -> `Swift Packages` -> `Add Package Dependency`, enter [JNMultipleImages repo's URL](https://github.com/JNDisrupter/JNMultipleImages.git)
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
-To integrate JNMultipleImages into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-
-use_frameworks!
-
-target '<Your Target Name>' do
-pod 'JNMultipleImages'
-end
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
 ## Usage
 
 #### To add JNMultipleImages in interface builder:

@@ -72,7 +72,7 @@ open class JNMultipleImagesView: UIView {
      - returns: loaded view
      */
     private func loadViewFromXibFile() -> UIView {
-        let bundle = Bundle(for: JNMultipleImagesView.self)
+        let bundle = Bundle.module
         let nib = UINib(nibName: "JNMultipleImagesView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
@@ -390,7 +390,7 @@ open class JNMultipleImagesView: UIView {
         
         // Set default placeholder image
         if imagesPlaceHolder == nil {
-            let bundle = Bundle(for: JNMultipleImagesView.self)
+            let bundle = Bundle.module
             imagesPlaceHolder = UIImage(named: "BrokenImageDefaultPlaceholder", in: bundle, compatibleWith: nil)
         }
         
